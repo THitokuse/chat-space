@@ -34,44 +34,40 @@ $(function() {
   }
 
   //インクリメンタルサーチ開始
-  $(function() {
-    $(".chat-group-form__input").on("input", function() {
-      $("#user-search-result").children().remove();
-      var user = $("#user-search-field").val();
-        $.ajax({
-          type: 'GET',
-          url: '/users',
-          data: { user: user },
-          dataType: 'json'
-        })
-      .done(function(users) {
-          $("#user_search_result").empty();
-            if (users.length !== 0) {
-              users.forEach(function(user){
-                var html = appendUsers(user);
-              })
-            } else {
-              var html = notUser();
-            }
-         })
-      .fail(function() {
-        alert('ユーザー検索に失敗しました');
-      });
+  $('.chat-group-form__input').on('input', function() {
+    $('#user-search-result').children().remove();
+    var user = $('#user-search-field').val();
+      $.ajax({
+        type: 'GET',
+        url: '/users',
+        data: { user: user },
+        dataType: 'json'
+      })
+    .done(function(users) {
+        $('#user_search_result').empty();
+          if (users.length !== 0) {
+            users.forEach(function(user){
+              appendUsers(user);
+            })
+          } else {
+            notUser();
+          }
+       })
+    .fail(function() {
+      alert('ユーザー検索に失敗しました');
     });
   });
 
   // ユーザーを追加
-  $(function() {
-    $("#user-search-result").on("click", ".chat-group-user__btn--add", function() {
-      var user_name = $(this).data('name');
-      var user_id = $(this).data('id');
-      $(this).parent().remove();
-      var html = appendMembers(user_name, user_id);
-    });
+  $('#user-search-result').on('click', '.chat-group-user__btn--add', function() {
+    var user_name = $(this).data('name');
+    var user_id = $(this).data('id');
+    $(this).parent().remove();
+    var html = appendMembers(user_name, user_id);
+  });
 
-    // ユーザーを削除
-    $("#chat-group-users").on("click", ".chat-group-user__btn--remove", function(){
-      $(this).parent().remove();
-    });
+  // ユーザーを削除
+  $("#chat-group-users").on("click", ".chat-group-user__btn--remove", function(){
+    $(this).parent().remove();
   });
 });
