@@ -1,7 +1,7 @@
 $(function() {
   function buildHTML(message){
-    var addImage = (message.image) ? `<img class="chat-content__image" src="${message.image}">` : '';
-    var html = `<div class="chat-content" data-message-id="${message.id}">
+    const addImage = (message.image) ? `<img class="chat-content__image" src="${message.image}">` : '';
+    const html = `<div class="chat-content" data-message-id="${message.id}">
                   <div class="chat-content__header">
                     <div class="chat-content__name">
                       ${ message.user_name }
@@ -23,9 +23,9 @@ $(function() {
     //フォームのsubmitイベントを中止
     e.preventDefault();
     //ajaxでリクエストを送る際のパスを取得
-    var url = $(this).attr('action');
+    const url = $(this).attr('action');
     //フォームに入力された値を取得
-    var formData = new FormData($(this).get()[0]);
+    const formData = new FormData($(this).get()[0]);
 
     $.ajax({
       url: url,
@@ -37,7 +37,7 @@ $(function() {
     })
     .done(function(message){
       //保存したデータをview画面に表示
-      var html = buildHTML(message);
+      const html = buildHTML(message);
       $('.chat-contents').append(html);
       //画面スクロール
       $('.chat-body').animate({scrollTop: $(".chat-body")[0].scrollHeight}, 'fast');
@@ -57,7 +57,7 @@ $(function() {
   //自動更新
   function update() {
     //更新されたメッセージID取得
-    var lastMessageId = ($('.chat-content')[0]) ? $('.chat-content:last').data('message-id') : 0;
+    const lastMessageId = ($('.chat-content')[0]) ? $('.chat-content:last').data('message-id') : 0;
     $.ajax({
       url: location.href,
       data: { id : lastMessageId },

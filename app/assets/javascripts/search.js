@@ -1,6 +1,6 @@
 $(function() {
   function appendUsers(user) {
-    var html = `<div class="chat-group-user">
+    const html = `<div class="chat-group-user">
                   <p class="chat-group-user__name">
                     ${ user.name }
                   </p>
@@ -12,7 +12,7 @@ $(function() {
   }
 
   function notUser() {
-    var html = `<div class="chat-group-user">
+    const html = `<div class="chat-group-user">
                   <p class="chat-group-user__name">
                     検索結果はありません。
                   </p>
@@ -21,7 +21,7 @@ $(function() {
   }
 
   function appendMembers(user_name, user_id) {
-    var html = `<div class="chat-group-user">
+    const html = `<div class="chat-group-user">
                   <input type = "hidden", value = ${ user_id }, name = "group[user_ids][]", id ="group_user_ids_${user_id}">
                   <p class="chat-group-user__name">
                     ${user_name}
@@ -36,7 +36,7 @@ $(function() {
   //インクリメンタルサーチ開始
   $('.chat-group-form__input').on('input', function() {
     $('#user-search-result').children().remove();
-    var user = $('#user-search-field').val();
+    const user = $('#user-search-field').val();
       $.ajax({
         type: 'GET',
         url: '/users',
@@ -60,10 +60,10 @@ $(function() {
 
   // ユーザーを追加
   $('#user-search-result').on('click', '.chat-group-user__btn--add', function() {
-    var user_name = $(this).data('name');
-    var user_id = $(this).data('id');
+    const user_name = $(this).data('name');
+    const user_id = $(this).data('id');
     $(this).parent().remove();
-    var html = appendMembers(user_name, user_id);
+    const html = appendMembers(user_name, user_id);
   });
 
   // ユーザーを削除
