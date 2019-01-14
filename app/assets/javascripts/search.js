@@ -37,10 +37,11 @@ $(function() {
   $('.chat-group-form__input').on('input', function() {
     $('#user-search-result').children().remove();
     const user = $('#user-search-field').val();
+    const group_id = $('.chat__group_id').val();
       $.ajax({
         type: 'GET',
         url: '/users',
-        data: { user: user },
+        data: { user: user, groupId: group_id },
         dataType: 'json'
       })
     .done(function(users) {
