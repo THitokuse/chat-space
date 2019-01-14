@@ -6,11 +6,10 @@ class UsersController < ApplicationController
       @group = Group.find(params[:groupId])
       @ids = @group.users.ids
       @users = @users.where.not(id: @ids)
-    else
-      respond_to do |format|
-        format.html { redirect_to new_group_path}
-        format.json
-      end
+    end
+    respond_to do |format|
+      format.html { redirect_to new_group_path}
+      format.json
     end
   end
 
